@@ -90,7 +90,8 @@ class AnalysisResponse(BaseModel):
     Every field below maps to one stage of the pipeline.
     """
 
-    score: int = Field(..., ge=0, le=100, description="Overall UI quality score (0–100).")
+    score: int = Field(..., ge=0, le=100, description="Overall UI quality score (0-100).")
+    clip_score: float = Field(..., ge=0.0, le=1.0, description="CLIP similarity score (0-1)")  # 👈 ADD THIS
     score_breakdown: ScoreBreakdown
     issues: list[Issue] = Field(..., description="All UX/design problems found.")
     elements_detected: list[DetectedElement] = Field(

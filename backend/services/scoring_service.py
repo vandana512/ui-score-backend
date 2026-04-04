@@ -10,7 +10,7 @@ In a real system the weights would be tuned on labelled data.
 For now they're sensible defaults that produce a realistic score.
 """
 
-from models.response_model import (
+from backend.models.response_model import (
     LayoutAnalysis,
     SemanticAnalysis,
     ScoreBreakdown,

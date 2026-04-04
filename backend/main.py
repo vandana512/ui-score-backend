@@ -7,7 +7,7 @@ Think of it as the 'front door' of the backend system.
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes.analyze import router as analyze_router
+from backend.routes.analyze import router as analyze_router
 
 # ---------------------------------------------------------------------------
 # App Setup
