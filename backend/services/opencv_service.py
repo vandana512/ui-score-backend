@@ -16,7 +16,7 @@ REPLACING WITH REAL OPENCV LATER:
 
 from pathlib import Path
 
-from models.response_model import LayoutAnalysis
+from backend.models.response_model import LayoutAnalysis
 
 
 # ---------------------------------------------------------------------------

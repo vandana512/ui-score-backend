@@ -14,9 +14,9 @@ from pathlib import Path
 
 from fastapi import APIRouter, File, UploadFile, HTTPException
 
-from utils.file_handler import validate_image, save_upload, cleanup_file, get_file_metadata
-from services.pipeline_service import run_pipeline
-from models.response_model import AnalysisResponse
+from backend.utils.file_handler import validate_image, save_upload, cleanup_file, get_file_metadata
+from backend.services.pipeline_service import run_pipeline
+from backend.models.response_model import AnalysisResponse
 
 
 # ---------------------------------------------------------------------------
@@ -41,7 +41,8 @@ router = APIRouter()
     ),
 )
 async def analyze_ui(
-    image: UploadFile = File(..., description="The UI screenshot to analyse."),
+    image: UploadFile = File(...),
+    category: str = "dashboard"   # 👈 ADD THIS
 ) -> AnalysisResponse:
     """
     Full pipeline handler.
@@ -84,6 +85,7 @@ async def analyze_ui(
         report: AnalysisResponse = run_pipeline(
             image_path=saved_path,
             file_metadata=file_meta,
+            category=category   # 👈 ADD THIS
         )
     except Exception as exc:
         # Surface unexpected errors as a 500 with a readable message.

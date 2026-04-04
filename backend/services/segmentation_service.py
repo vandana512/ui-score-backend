@@ -14,7 +14,7 @@ REPLACING WITH A REAL MODEL LATER:
 
 from pathlib import Path
 
-from models.response_model import SegmentedRegion
+from backend.models.response_model import SegmentedRegion
 
 
 # ---------------------------------------------------------------------------

@@ -18,16 +18,13 @@ To add a new stage later, just import it here and call it in run_pipeline().
 import time
 from pathlib import Path
 
-from services.yolo_service import detect_ui_elements
-from services.segmentation_service import segment_layout
-from services.opencv_service import analyze_layout
-from services.clip_service import analyze_semantics
-from services.scoring_service import compute_score
+from backend.services.yolo_service import detect_ui_elements
+from backend.services.segmentation_service import segment_layout
+from backend.services.opencv_service import analyze_layout
+from backend.services.clip_service import run_clip_module
+from backend.services.scoring_service import compute_score
 
-from models.response_model import (
-    AnalysisResponse,
-    Issue,
-)
+from backend.models.response_model import AnalysisResponse, Issue
 
 
 # ---------------------------------------------------------------------------
@@ -74,7 +71,7 @@ def _collect_issues(layout_analysis, semantic_analysis) -> list[Issue]:
 # Main pipeline entry point
 # ---------------------------------------------------------------------------
 
-def run_pipeline(image_path: Path, file_metadata: dict) -> AnalysisResponse:
+def run_pipeline(image_path: Path, file_metadata: dict, category: str) -> AnalysisResponse:
     """
     Execute every analysis stage in sequence and return the full report.
 
@@ -117,7 +114,18 @@ def run_pipeline(image_path: Path, file_metadata: dict) -> AnalysisResponse:
     # Stage 4 — CLIP: semantic / UX analysis
     # ------------------------------------------------------------------
     stage_start = time.perf_counter()
-    semantic_analysis = analyze_semantics(image_path)
+
+    clip_result = run_clip_module(str(image_path), category)
+    clip_score = clip_result["clip_score"]
+
+    from backend.models.response_model import SemanticAnalysis
+
+    semantic_analysis = SemanticAnalysis(
+        detected_issues=[],
+        accessibility_flags=[],
+        style_observations=[]
+    )
+
     clip_ms = round((time.perf_counter() - stage_start) * 1000, 2)
 
     # ------------------------------------------------------------------
@@ -168,4 +176,5 @@ def run_pipeline(image_path: Path, file_metadata: dict) -> AnalysisResponse:
         semantic_analysis=semantic_analysis,
         suggestions=suggestions,
         metadata=metadata,
+        clip_score=clip_score
     )
