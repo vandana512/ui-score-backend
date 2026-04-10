@@ -1,0 +1,22 @@
+names:
+  0: link
+  1: button
+  2: input
+  3: select
+  4: textarea
+  5: label
+  6: checkbox
+  7: radio
+  8: dropdown
+  9: slider
+  10: toggle
+  11: menu_item
+  12: clickable
+  13: icon
+  14: image
+  15: text
+nc: 16
+path: /kaggle/working/augmented
+test: /kaggle/input/datasets/daudaudinang/ui-elements-detection-dataset/test/images
+train: /kaggle/working/augmented/train/images
+val: /kaggle/input/datasets/daudaudinang/ui-elements-detection-dataset/val/images

@@ -1,0 +1,58 @@
+# ==============================
+# Python
+# ==============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.ipynb_checkpoints/
+
+# ==============================
+# Virtual Environment
+# ==============================
+.env
+venv/
+.env.*
+
+# ==============================
+# Kaggle / Training Outputs
+# ==============================
+runs/
+output/
+augmented/
+.virtual_documents/
+
+# YOLO training artifacts
+train_batch*.jpg
+val_batch*.jpg
+confusion_matrix.png
+results.png
+
+# Cache
+*.cache
+
+# ==============================
+# Images (generated predictions)
+# ==============================
+*.jpg
+*.png
+
+# ==============================
+# Model Weights (IMPORTANT)
+# ==============================
+*.pt
+*.pth
+
+# ==============================
+# Data (optional - depends on you)
+# ==============================
+# If dataset is large → uncomment below
+# data/images/
+# data/labels/
+
+# ==============================
+# Logs / Misc
+# ==============================
+*.log
+*.csv
+.DS_Store
